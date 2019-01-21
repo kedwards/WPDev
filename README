@@ -25,7 +25,6 @@ LWP-Dev requires [Vagrant](https://www.vagrantup.com/) v2.2.3+ and [Ansible](htt
 
 Install the dependencies and start the server.
 
-```sh
-$ cd lwp-dev
-$ vagrant up
-```
+
+    $ cd lwp-dev
+    $ vagrant up
