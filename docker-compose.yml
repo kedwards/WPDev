@@ -1,0 +1,51 @@
+version: "3.7"
+
+services:
+  wordpress:
+    image: wordpress:latest
+    depends_on:
+      - mariadb
+    ports:
+      - "80:80"
+    networks:
+      - wordpress_private
+    volumes:
+      - /vagrant/html:/var/www/html
+    secrets:
+      - source: mariadb_password
+        target: wp_db_password
+    environment:
+      WORDPRESS_DB_HOST: mariadb
+      WORDPRESS_DB_USER: wordpress
+      WORDPRESS_DB_PASSWORD_FILE: /run/secrets/wp_db_password
+      WORDPRESS_DB_NAME: wordpress
+
+  mariadb:
+    image: mariadb:latest
+    networks:
+      - wordpress_private
+    volumes:
+      - mariadb_data:/var/lib/mysql
+    secrets:
+      - source: mariadb_root_password
+      - source: mariadb_password
+    environment:
+      MYSQL_ROOT_PASSWORD_FILE: /run/secrets/mariadb_root_password
+      MYSQL_PASSWORD_FILE: /run/secrets/mariadb_password
+      MYSQL_USER: wordpress
+      MYSQL_DATABASE: wordpress
+
+volumes:
+  mariadb_data:
+
+secrets:
+  mariadb_root_password:
+    file: db_root_password.txt
+    name: mariadb_root_password
+  mariadb_password:
+    file: db_password.txt
+    name: mariadb_password
+
+networks:
+  wordpress_private:
+    name: wordpress_private

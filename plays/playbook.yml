@@ -1,0 +1,9 @@
+---
+- name: Wordpress
+  hosts: all
+  become: yes
+  tasks:
+    - name: Wordpres Development
+      docker_service:
+        project_name: wordpress
+        project_src: /vagrant
