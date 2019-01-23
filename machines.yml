@@ -1,16 +1,18 @@
 ---
-# - type: "vb"
-#   box: "debian/contrib-stretch64"
-#   name: "dockerhostvm2"
-#   nics:
-#     - type: "private_network"
-#       ip_addr: "192.168.100.101"
-#   ram: "512"
-#   sync_disabled: false
-#   vcpu: "1"
-#   playbook: "./plays/site.yml"
-#   inventory: "inventory"
+- type: "vb"
+  enabled:  false
+  box: "debian/contrib-stretch64"
+  name: "dockerhostvm2"
+  nics:
+    - type: "private_network"
+      ip_addr: "192.168.100.101"
+  ram: "512"
+  sync_disabled: false
+  vcpu: "1"
+  playbook: "./plays/site.yml"
+  inventory: "inventory"
 - type: "aws"
+  enabled: false
   box: "aws-dummy"
   keypair_name: "kedwards_keca"
   instance_type: "t2.micro"
