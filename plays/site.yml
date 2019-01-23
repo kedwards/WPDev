@@ -1,7 +1,7 @@
 ---
 # This is a sitewide playbook
 # filename: site.yml
-- import_playbook: add_key.yml
+# - import_playbook: add_key.yml
 
 - import_playbook: docker.yml
 

@@ -23,8 +23,7 @@ And of course LWP-Dev itself is open source with a [public repository](https://g
 
 LWP-Dev requires [Vagrant](https://www.vagrantup.com/) v2.2.3+ and [Ansible](https://www.ansible.com/) v2.7+  to run.
 
-Install the dependencies and start the server.
-
+Install the dependencies, configure machines.yml and start the server.
 
     $ cd lwp-dev
     $ vagrant up
