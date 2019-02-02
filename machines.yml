@@ -1,16 +1,12 @@
 ---
 - type: "vb"
-  enabled:  false
+  enabled: true
   box: "debian/contrib-stretch64"
-  name: "dockerhostvm2"
-  nics:
-    - type: "private_network"
-      ip_addr: "192.168.100.101"
+  name: "dockerhostvm"
+  ip_addr: "192.168.100.150"
   ram: "512"
-  sync_disabled: false
   vcpu: "1"
-  playbook: "./plays/site.yml"
-  inventory: "inventory"
+
 - type: "aws"
   enabled: false
   box: "aws-dummy"
@@ -26,11 +22,3 @@
     team: "devops"
   security_group: "sg-036a315514f2508f9"
   name: "dockerhostvmaws"
-  nics:
-    - type: "private_network"
-      ip_addr: "192.168.100.111"
-  ram: "512"
-  sync_disabled: false
-  vcpu: "1"
-  playbook: "./plays/site.yml"
-  inventory: "inventory/"
