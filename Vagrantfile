@@ -25,7 +25,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       config.vbguest.auto_update = false
       config.vm.box_check_update = false
       config.ssh.insert_key = false
-      config.vm.synced_folder '.', '/vagrant', disabled: true
+      config.vm.synced_folder '.', '/vagrant', disabled: false
       config.vm.define machine['name'] do |srv|
         srv.vm.hostname = machine['name']
 
@@ -70,11 +70,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         srv.vm.provision "file", source: "~/.ssh/id_rsa.pub", destination: "~/.ssh/authorized_keys"
         srv.ssh.private_key_path = ["~/.vagrant.d/insecure_private_key", "~/.ssh/id_rsa"]
         srv.ssh.insert_key = false
-
-        config.trigger.after :up do |trigger|
-          trigger.info = "Adding box to docker-machine"
-          trigger.run = { inline: 'docker-machine create -d generic --generic-ip-address ' + machine['ip_addr'] + '--generic-ssh-port 22 --generic-ssh-key ~/.vagrant.d/insecure_provate_key --generic-ssh-user vagrant ' + machine['name']}
-        end
 
         srv.vm.provision :vai do |ansible|
           ansible.inventory_dir='inventory/'
