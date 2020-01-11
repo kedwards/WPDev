@@ -4,7 +4,7 @@ VAGRANTFILE_API_VERSION = "2"
 
 require 'yaml'
 
-plugins_dependencies = %w(vagrant-aws vagrant-vbguest vagrant-hostsupdater)
+plugins_dependencies = %w(vagrant-aws vagrant-vbguest vai vagrant-hostsupdater)
 plugin_status = false
 plugins_dependencies.each do |plugin_name|
   unless Vagrant.has_plugin? plugin_name
@@ -67,13 +67,17 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
           end
         end
 
-        srv.vm.provision "file", source: "~/.ssh/id_rsa.pub", destination: "~/.ssh/authorized_keys"
+        srv.vm.provision "file", source: machine['ssh_file'], destination: "~/.ssh/authorized_keys"
         srv.ssh.private_key_path = ["~/.vagrant.d/insecure_private_key", "~/.ssh/id_rsa"]
         srv.ssh.insert_key = false
 
         srv.vm.provision :vai do |ansible|
           ansible.inventory_dir='inventory/'
           ansible.inventory_filename='vagrant'
+        end
+
+        srv.vm.provision "ansible" do |ansible|
+          ansible.playbook = "plays/wpd.yml"
         end
       end
     end

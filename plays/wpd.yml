@@ -1,6 +1,6 @@
 ---
 - import_playbook: wpd/add_key.yml
 
-- import_playbook: wpd/docker.yml
+# - import_playbook: wpd/docker.yml
 
-- import_playbook: wpd/playbook.yml
+# - import_playbook: wpd/playbook.yml

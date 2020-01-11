@@ -1,11 +1,12 @@
 ---
 - type: "vb"
   enabled: true
-  box: "debian/contrib-stretch64"
-  name: "dockerhostvm"
-  ip_addr: "192.168.100.150"
+  box: "ubuntu/bionic64"
+  name: "swarm-1"
+  ip_addr: "10.10.10.10"
   ram: "512"
   vcpu: "1"
+  ssh_file: "~/.ssh/id_rsa.pub"
 
 - type: "aws"
   enabled: false
